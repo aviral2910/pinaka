@@ -29,7 +29,7 @@ export default function Contact() {
               </div>
               <div>
                 <h4 className="text-lg font-bold text-gray-100 mb-1">Call Us</h4>
-                <p className="text-gray-400">+91 98765 43210</p>
+                <p className="text-gray-400">+91 8796670959</p>
                 <p className="text-gray-500 text-sm mt-1">Mon-Sat, 9AM-6PM</p>
               </div>
             </motion.div>
