@@ -63,7 +63,7 @@ export default function Contact() {
               </div>
               <div>
                 <h4 className="text-lg font-bold text-gray-100 mb-1">Visit Us</h4>
-                <p className="text-gray-400 leading-relaxed">123 Business Avenue, Sector 62, Noida, UP 201309</p>
+                <p className="text-gray-400 leading-relaxed">PLOT NO 3 khasra 1896 kanha nagar<br />KALLI PASCHIM LUCKNOW UP 226014, INDIA</p>
               </div>
             </motion.div>
           </div>

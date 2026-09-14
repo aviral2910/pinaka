@@ -44,7 +44,7 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-gray-400">
                 <MapPin className="h-5 w-5 text-blue-400 shrink-0 mt-1" />
-                <span>123 Business Avenue, Sector 62,<br />Noida, UP 201309</span>
+                <span>PLOT NO 3 khasra 1896 kanha nagar<br />KALLI PASCHIM LUCKNOW UP 226014, INDIA</span>
               </li>
               <li className="flex items-center gap-3 text-gray-400">
                 <Phone className="h-5 w-5 text-blue-400 shrink-0" />
