@@ -31,6 +31,52 @@ export default function EligibilityPopup() {
     sessionStorage.setItem('eligibilityPopupClosed', 'true');
   };
 
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    company: '',
+    service: '',
+    funding: '',
+    industry: '',
+    state: '',
+    info: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Format the message
+    const message = `*New Application (Pinaka Advisory)*\n\n` +
+      `*Personal Details:*\n` +
+      `Name: ${formData.fullName}\n` +
+      `Email: ${formData.email}\n` +
+      `Phone: ${formData.phone}\n` +
+      `Company: ${formData.company || 'N/A'}\n\n` +
+      `*Business Details:*\n` +
+      `Service Required: ${formData.service}\n` +
+      `Funding Range: ${formData.funding || 'N/A'}\n` +
+      `Industry: ${formData.industry}\n` +
+      `State: ${formData.state}\n\n` +
+      `*Additional Info:*\n${formData.info || 'None'}`;
+
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Open WhatsApp in a new tab
+    window.open(`https://wa.me/918796670959?text=${encodedMessage}`, '_blank');
+    
+    // Trigger Email client in the current window
+    setTimeout(() => {
+      window.location.href = `mailto:pinakaadvisory@gmail.com?subject=New Application - ${formData.fullName}&body=${encodedMessage}`;
+    }, 500);
+
+    closePopup();
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -120,7 +166,7 @@ export default function EligibilityPopup() {
               <h3 className="text-2xl font-bold text-white mb-2">Start Your Application</h3>
               <p className="text-gray-400 text-sm mb-8">Fill in your details and we'll get back within 24 hours.</p>
               
-              <form className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-8">
                 {/* Personal Details */}
                 <div>
                   <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Personal Details</h4>
@@ -129,28 +175,28 @@ export default function EligibilityPopup() {
                       <label className="block text-sm font-medium text-gray-300 mb-1">Full Name <span className="text-red-400">*</span></label>
                       <div className="relative">
                         <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" />
-                        <input type="text" className="w-full pl-10 pr-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-white text-sm transition-all placeholder:text-gray-600" placeholder="Enter your name" />
+                        <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} required className="w-full pl-10 pr-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-white text-sm transition-all placeholder:text-gray-600" placeholder="Enter your name" />
                       </div>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-300 mb-1">Email <span className="text-red-400">*</span></label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" />
-                        <input type="email" className="w-full pl-10 pr-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-white text-sm transition-all placeholder:text-gray-600" placeholder="Enter your email" />
+                        <input type="email" name="email" value={formData.email} onChange={handleChange} required className="w-full pl-10 pr-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-white text-sm transition-all placeholder:text-gray-600" placeholder="Enter your email" />
                       </div>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-300 mb-1">Phone <span className="text-red-400">*</span></label>
                       <div className="relative">
                         <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" />
-                        <input type="tel" className="w-full pl-10 pr-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-white text-sm transition-all placeholder:text-gray-600" placeholder="Enter your number" />
+                        <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required className="w-full pl-10 pr-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-white text-sm transition-all placeholder:text-gray-600" placeholder="Enter your number" />
                       </div>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-300 mb-1">Company Name</label>
                       <div className="relative">
                         <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" />
-                        <input type="text" className="w-full pl-10 pr-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-white text-sm transition-all placeholder:text-gray-600" placeholder="Enter company name" />
+                        <input type="text" name="company" value={formData.company} onChange={handleChange} className="w-full pl-10 pr-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-white text-sm transition-all placeholder:text-gray-600" placeholder="Enter company name" />
                       </div>
                     </div>
                   </div>
@@ -162,43 +208,43 @@ export default function EligibilityPopup() {
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-300 mb-1">Service Required <span className="text-red-400">*</span></label>
-                      <select className="w-full px-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-gray-300 text-sm transition-all">
+                      <select name="service" value={formData.service} onChange={handleChange} required className="w-full px-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-gray-300 text-sm transition-all">
                         <option className="bg-[#111827]" value="">Select a service</option>
-                        <option className="bg-[#111827]" value="grants">Government Grants & Subsidy</option>
-                        <option className="bg-[#111827]" value="loan">MSME Loan / CGTMSE</option>
-                        <option className="bg-[#111827]" value="startup">Startup Funding (SISFS / CGSS)</option>
-                        <option className="bg-[#111827]" value="registration">Registration & Compliance</option>
-                        <option className="bg-[#111827]" value="marketing">Digital Marketing & Website</option>
-                        <option className="bg-[#111827]" value="certification">Certifications (DPIIT, ZED, ISO)</option>
+                        <option className="bg-[#111827]" value="Government Grants & Subsidy">Government Grants & Subsidy</option>
+                        <option className="bg-[#111827]" value="MSME Loan / CGTMSE">MSME Loan / CGTMSE</option>
+                        <option className="bg-[#111827]" value="Startup Funding">Startup Funding (SISFS / CGSS)</option>
+                        <option className="bg-[#111827]" value="Registration & Compliance">Registration & Compliance</option>
+                        <option className="bg-[#111827]" value="Digital Marketing & Website">Digital Marketing & Website</option>
+                        <option className="bg-[#111827]" value="Certifications">Certifications (DPIIT, ZED, ISO)</option>
                       </select>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-300 mb-1">Funding Range</label>
-                      <select className="w-full px-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-gray-300 text-sm transition-all">
+                      <select name="funding" value={formData.funding} onChange={handleChange} className="w-full px-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-gray-300 text-sm transition-all">
                         <option className="bg-[#111827]" value="">Select amount</option>
-                        <option className="bg-[#111827]" value="<10L">Up to ₹10 Lakh</option>
-                        <option className="bg-[#111827]" value="10L-50L">₹10 – 50 Lakh</option>
-                        <option className="bg-[#111827]" value="50L-2Cr">₹50 Lakh – 2 Cr</option>
-                        <option className="bg-[#111827]" value="2Cr-10Cr">₹2 Cr – 10 Cr</option>
-                        <option className="bg-[#111827]" value=">10Cr">Above ₹10 Cr</option>
+                        <option className="bg-[#111827]" value="Up to ₹10 Lakh">Up to ₹10 Lakh</option>
+                        <option className="bg-[#111827]" value="₹10 – 50 Lakh">₹10 – 50 Lakh</option>
+                        <option className="bg-[#111827]" value="₹50 Lakh – 2 Cr">₹50 Lakh – 2 Cr</option>
+                        <option className="bg-[#111827]" value="₹2 Cr – 10 Cr">₹2 Cr – 10 Cr</option>
+                        <option className="bg-[#111827]" value="Above ₹10 Cr">Above ₹10 Cr</option>
                       </select>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-300 mb-1">Industry <span className="text-red-400">*</span></label>
-                      <select className="w-full px-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-gray-300 text-sm transition-all">
+                      <select name="industry" value={formData.industry} onChange={handleChange} required className="w-full px-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-gray-300 text-sm transition-all">
                         <option className="bg-[#111827]" value="">Select industry</option>
                         <option className="bg-[#111827]" value="Manufacturing">Manufacturing</option>
                         <option className="bg-[#111827]" value="Services">Services</option>
                         <option className="bg-[#111827]" value="Trading">Trading</option>
-                        <option className="bg-[#111827]" value="Technology">Technology / IT</option>
-                        <option className="bg-[#111827]" value="Agriculture">Agriculture & Food</option>
+                        <option className="bg-[#111827]" value="Technology / IT">Technology / IT</option>
+                        <option className="bg-[#111827]" value="Agriculture & Food">Agriculture & Food</option>
                         <option className="bg-[#111827]" value="Textile">Textile</option>
                         <option className="bg-[#111827]" value="Other">Other</option>
                       </select>
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-300 mb-1">State <span className="text-red-400">*</span></label>
-                      <select className="w-full px-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-gray-300 text-sm transition-all">
+                      <select name="state" value={formData.state} onChange={handleChange} required className="w-full px-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-gray-300 text-sm transition-all">
                         <option className="bg-[#111827]" value="">Select state</option>
                         <option className="bg-[#111827]" value="Uttar Pradesh">Uttar Pradesh</option>
                         <option className="bg-[#111827]" value="Delhi NCR">Delhi NCR</option>
@@ -220,13 +266,14 @@ export default function EligibilityPopup() {
                   <div className="relative">
                     <MessageSquare className="absolute left-3 top-3 h-5 w-5 text-gray-500" />
                     <textarea 
+                      name="info" value={formData.info} onChange={handleChange}
                       className="w-full pl-10 pr-4 py-2.5 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-white text-sm transition-all placeholder:text-gray-600 min-h-[100px] resize-none" 
                       placeholder="Tell us about your business and what you need help with..."
                     ></textarea>
                   </div>
                 </div>
 
-                <button type="button" onClick={closePopup} className="w-full bg-gradient-to-r from-[#2D7B93] to-[#1E527D] hover:from-[#3a9cb7] hover:to-[#256499] text-white py-4 rounded-xl font-bold text-lg mt-4 transition-all shadow-lg shadow-blue-900/20 flex items-center justify-center gap-2">
+                <button type="submit" className="w-full bg-gradient-to-r from-[#2D7B93] to-[#1E527D] hover:from-[#3a9cb7] hover:to-[#256499] text-white py-4 rounded-xl font-bold text-lg mt-4 transition-all shadow-lg shadow-blue-900/20 flex items-center justify-center gap-2">
                   Submit Application
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                 </button>
