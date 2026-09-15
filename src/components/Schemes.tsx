@@ -50,20 +50,36 @@ export default function Schemes() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative lg:h-[500px] flex items-center justify-center rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+            className="bg-[#0B1120] border border-white/10 rounded-3xl p-8 sm:p-10 shadow-[0_0_50px_rgba(0,0,0,0.5)] relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#0B1120] to-transparent opacity-60 z-10 mix-blend-multiply"></div>
-            <img 
-              src="https://images.unsplash.com/photo-1556761175-5973dc0f32b7?q=80&w=2070&auto=format&fit=crop" 
-              alt="Business Growth" 
-              className="w-full h-full object-cover opacity-80"
-            />
-            <div className="absolute bottom-8 left-8 right-8 z-20">
-              <div className="bg-[#0B1120]/80 backdrop-blur-md rounded-2xl p-6 border border-white/10">
-                <div className="text-2xl font-black text-white mb-1">Scale with Confidence</div>
-                <p className="text-gray-300">Access up to ₹1 Crore in collateral-free funding.</p>
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#2D7B93] to-[#1E527D]"></div>
+            
+            <h3 className="text-2xl font-bold text-white mb-6">Check Your Eligibility Today</h3>
+            <form className="space-y-5">
+              <div>
+                <label className="block text-sm font-semibold text-gray-400 mb-2">Business Name</label>
+                <input type="text" className="w-full px-4 py-3 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-white transition-all placeholder:text-gray-600" placeholder="Enter business name" />
               </div>
-            </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-400 mb-2">Contact Number</label>
+                <input type="tel" className="w-full px-4 py-3 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-white transition-all placeholder:text-gray-600" placeholder="Enter mobile number" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-400 mb-2">Business Type</label>
+                <select className="w-full px-4 py-3 bg-[#111827] rounded-xl border border-white/10 focus:ring-2 focus:ring-[#2D7B93] focus:border-transparent outline-none text-white transition-all appearance-none">
+                  <option className="bg-[#111827]">Select Type</option>
+                  <option className="bg-[#111827]">New Startup</option>
+                  <option className="bg-[#111827]">Existing MSME</option>
+                  <option className="bg-[#111827]">Individual/Freelancer</option>
+                </select>
+              </div>
+              <button type="button" className="w-full bg-gradient-to-r from-[#2D7B93] to-[#1E527D] hover:from-[#3a9cb7] hover:to-[#256499] text-white py-4 rounded-xl font-bold text-lg mt-4 transition-all shadow-lg shadow-blue-900/20">
+                Get Callback
+              </button>
+            </form>
+            <p className="text-xs text-center text-gray-500 mt-5">
+              By submitting, you agree to our terms. 100% Privacy Guaranteed.
+            </p>
           </motion.div>
         </div>
       </div>
