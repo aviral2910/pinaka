@@ -42,39 +42,56 @@ export default function EligibilityPopup() {
     state: '',
     info: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
-    // Format the message
-    const message = `*New Application (Pinaka Advisory)*\n\n` +
-      `*Personal Details:*\n` +
-      `Name: ${formData.fullName}\n` +
-      `Email: ${formData.email}\n` +
-      `Phone: ${formData.phone}\n` +
-      `Company: ${formData.company || 'N/A'}\n\n` +
-      `*Business Details:*\n` +
-      `Service Required: ${formData.service}\n` +
-      `Funding Range: ${formData.funding || 'N/A'}\n` +
-      `Industry: ${formData.industry}\n` +
-      `State: ${formData.state}\n\n` +
-      `*Additional Info:*\n${formData.info || 'None'}`;
-
-    const encodedMessage = encodeURIComponent(message);
-    
-    // Open WhatsApp in a new tab
-    window.open(`https://wa.me/918796670959?text=${encodedMessage}`, '_blank');
-    
-    // Trigger Email client in the current window
-    setTimeout(() => {
-      window.location.href = `mailto:pinakaadvisory@gmail.com?subject=New Application - ${formData.fullName}&body=${encodedMessage}`;
-    }, 500);
-
-    closePopup();
+    try {
+      // Send email directly in the background using FormSubmit
+      await fetch("https://formsubmit.co/ajax/pinakaadvisory@gmail.com", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            _subject: `New Lead: ${formData.fullName} - Pinaka Advisory`,
+            _captcha: "false",
+            "Full Name": formData.fullName,
+            "Email": formData.email,
+            "Phone Number": formData.phone,
+            "Company": formData.company || "N/A",
+            "Service Required": formData.service,
+            "Funding Range": formData.funding || "N/A",
+            "Industry": formData.industry,
+            "State": formData.state,
+            "Additional Information": formData.info || "None"
+        })
+      });
+      
+      setIsSuccess(true);
+      setTimeout(() => {
+        closePopup();
+        setIsSuccess(false);
+        setFormData({
+          fullName: '', email: '', phone: '', company: '', 
+          service: '', funding: '', industry: '', state: '', info: ''
+        });
+      }, 3000);
+      
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -273,9 +290,17 @@ export default function EligibilityPopup() {
                   </div>
                 </div>
 
-                <button type="submit" className="w-full bg-gradient-to-r from-[#2D7B93] to-[#1E527D] hover:from-[#3a9cb7] hover:to-[#256499] text-white py-4 rounded-xl font-bold text-lg mt-4 transition-all shadow-lg shadow-blue-900/20 flex items-center justify-center gap-2">
-                  Submit Application
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                <button type="submit" disabled={isSubmitting || isSuccess} className="w-full bg-gradient-to-r from-[#2D7B93] to-[#1E527D] hover:from-[#3a9cb7] hover:to-[#256499] text-white py-4 rounded-xl font-bold text-lg mt-4 transition-all shadow-lg shadow-blue-900/20 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed">
+                  {isSubmitting ? (
+                    'Submitting...'
+                  ) : isSuccess ? (
+                    'Application Sent! ✓'
+                  ) : (
+                    <>
+                      Submit Application
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                    </>
+                  )}
                 </button>
               </form>
               
