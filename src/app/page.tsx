@@ -7,10 +7,12 @@ import About from '@/components/About';
 import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import EligibilityPopup from '@/components/EligibilityPopup';
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#080D18]">
+      <EligibilityPopup />
       <Navbar />
       <Hero />
       <Services />

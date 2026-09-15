@@ -28,9 +28,12 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden xl:flex">
-            <Link href="#schemes" className="bg-gradient-to-r from-[#2D7B93] to-[#1E527D] hover:from-[#3a9cb7] hover:to-[#256499] text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-blue-500/20 border border-blue-400/20 whitespace-nowrap">
+            <button 
+              onClick={() => window.dispatchEvent(new Event('openEligibilityPopup'))}
+              className="bg-gradient-to-r from-[#2D7B93] to-[#1E527D] hover:from-[#3a9cb7] hover:to-[#256499] text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-blue-500/20 border border-blue-400/20 whitespace-nowrap"
+            >
               Check Eligibility
-            </Link>
+            </button>
           </div>
 
           <button 
@@ -58,9 +61,15 @@ export default function Navbar() {
               <Link href="#process" onClick={() => setIsOpen(false)} className="text-lg font-bold text-gray-200 hover:text-white">Process</Link>
               <Link href="#testimonials" onClick={() => setIsOpen(false)} className="text-lg font-bold text-gray-200 hover:text-white">Testimonials</Link>
               <Link href="#contact" onClick={() => setIsOpen(false)} className="text-lg font-bold text-gray-200 hover:text-white">Contact</Link>
-              <Link href="#schemes" onClick={() => setIsOpen(false)} className="bg-gradient-to-r from-[#2D7B93] to-[#1E527D] text-white text-center px-6 py-4 rounded-xl font-bold mt-4 shadow-md">
+              <button 
+                onClick={() => {
+                  setIsOpen(false);
+                  window.dispatchEvent(new Event('openEligibilityPopup'));
+                }}
+                className="bg-gradient-to-r from-[#2D7B93] to-[#1E527D] text-white text-center px-6 py-4 rounded-xl font-bold mt-4 shadow-md"
+              >
                 Check Eligibility
-              </Link>
+              </button>
             </div>
           </motion.div>
         )}
