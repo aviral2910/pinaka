@@ -62,17 +62,18 @@ export default function EligibilityPopup() {
             'Accept': 'application/json'
         },
         body: JSON.stringify({
-            _subject: `New Lead: ${formData.fullName} - Pinaka Advisory`,
+            _subject: `🚀 New Lead: ${formData.fullName} - Pinaka Advisory`,
+            _template: "box",
             _captcha: "false",
-            "Full Name": formData.fullName,
-            "Email": formData.email,
-            "Phone Number": formData.phone,
-            "Company": formData.company || "N/A",
-            "Service Required": formData.service,
-            "Funding Range": formData.funding || "N/A",
-            "Industry": formData.industry,
-            "State": formData.state,
-            "Additional Information": formData.info || "None"
+            "👤 Full Name": formData.fullName,
+            "✉️ Email": formData.email,
+            "📱 Phone Number": formData.phone,
+            "🏢 Company": formData.company || "Not Provided",
+            "🛠️ Service Required": formData.service,
+            "💰 Funding Range": formData.funding || "Not Provided",
+            "🏭 Industry": formData.industry,
+            "📍 State": formData.state,
+            "📝 Additional Information": formData.info || "None"
         })
       });
       
