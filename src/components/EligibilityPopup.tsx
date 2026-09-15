@@ -55,7 +55,7 @@ export default function EligibilityPopup() {
     
     try {
       // Send email directly in the background using FormSubmit
-      await fetch("https://formsubmit.co/ajax/pinakaadvisory@gmail.com", {
+      await fetch("https://formsubmit.co/ajax/618d233653e5c3d8575cc2816e0896f6", {
         method: "POST",
         headers: { 
             'Content-Type': 'application/json',
