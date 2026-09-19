@@ -1,4 +1,6 @@
-"use client";
+const fs = require('fs');
+
+const data = `"use client";
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -15,11 +17,11 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
@@ -31,10 +33,10 @@ export default function Contact() {
             'Accept': 'application/json'
         },
         body: JSON.stringify({
-            _subject: `💬 New Contact Message: ${formData.firstName} ${formData.lastName} - Pinaka Advisory`,
+            _subject: \`💬 New Contact Message: \${formData.firstName} \${formData.lastName} - Pinaka Advisory\`,
             _template: "box",
             _captcha: "false",
-            "👤 Name": `${formData.firstName} ${formData.lastName}`,
+            "👤 Name": \`\${formData.firstName} \${formData.lastName}\`,
             "✉️ Email": formData.email,
             "📱 Phone Number": formData.phone,
             "📝 Message": formData.message
@@ -171,3 +173,6 @@ export default function Contact() {
     </section>
   );
 }
+`;
+
+fs.writeFileSync('src/components/Contact.tsx', data);
