@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Building2, TrendingUp, Users, ShieldCheck } from 'lucide-react';
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
+import indiaTopoJson from "../data/india-states.json";
 
 const TOP_STATS = [
   {
@@ -186,7 +187,7 @@ export default function GovImpact() {
                 }}
                 className="w-full h-full focus:outline-none"
               >
-                <Geographies geography="/india-states.json">
+                <Geographies geography={indiaTopoJson as any}>
                   {({ geographies }) =>
                     geographies.map((geo) => (
                       <Geography
