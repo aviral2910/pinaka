@@ -1,4 +1,6 @@
-export interface SchemeData {
+const fs = require('fs');
+
+const data = `export interface SchemeData {
   id: string;
   name: string;
   slug: string;
@@ -558,3 +560,6 @@ export const schemesData: SchemeData[] = [
 export function getSchemeBySlug(slug: string): SchemeData | undefined {
   return schemesData.find(s => s.slug === slug);
 }
+`;
+
+fs.writeFileSync('src/data/schemes.ts', data);
