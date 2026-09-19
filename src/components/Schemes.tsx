@@ -35,7 +35,7 @@ export default function Schemes() {
               Many MSMEs and Startups miss out on government benefits due to lack of awareness or complex paperwork. We bridge that gap with 100% transparency.
             </p>
             
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-4 mb-8">
               {schemes.map((scheme, idx) => (
                 <div key={idx} className="flex items-start gap-3 bg-white/5 hover:bg-white/10 transition-colors p-4 rounded-xl border border-white/10 backdrop-blur-sm">
                   <CheckCircle2 className="h-6 w-6 text-emerald-400 shrink-0" />
@@ -43,6 +43,13 @@ export default function Schemes() {
                 </div>
               ))}
             </div>
+
+            <a href="/schemes" className="inline-flex items-center gap-2 text-[#2D7B93] font-bold text-lg hover:text-white transition-colors group">
+              Explore All Schemes Detail
+              <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
           </motion.div>
 
           <motion.div
