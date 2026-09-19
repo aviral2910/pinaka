@@ -18,7 +18,7 @@ export default function About() {
               Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Pinaka Advisory?</span>
             </h2>
             <p className="text-xl text-gray-400 mb-8 leading-relaxed font-medium">
-              We act as the 'Sarathi' (Charioteer) for your business success. We navigate the complex landscape of government regulations, schemes, and business strategy so you can focus on growing your business.
+              We act as the 'Pinaka' for your business success. We navigate the complex landscape of government regulations, schemes, and business strategy so you can focus on growing your business.
             </p>
 
             <div className="space-y-6">
