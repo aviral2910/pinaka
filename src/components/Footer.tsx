@@ -60,9 +60,10 @@ export default function Footer() {
         
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
           <p>© {new Date().getFullYear()} Pinaka Advisory LLP. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-blue-400 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-blue-400 transition-colors">Terms of Service</a>
+          <div className="flex flex-wrap justify-center gap-6">
+            <Link href="/privacy-policy" className="hover:text-blue-400 transition-colors">Privacy Policy</Link>
+            <Link href="/terms-conditions" className="hover:text-blue-400 transition-colors">Terms of Service</Link>
+            <Link href="/refund-policy" className="hover:text-blue-400 transition-colors">Refund Policy</Link>
           </div>
         </div>
       </div>
