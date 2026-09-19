@@ -1,4 +1,6 @@
-"use client";
+const fs = require('fs');
+
+const data = `"use client";
 
 import { Suspense, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -259,3 +261,6 @@ export default function EligibilityResultsPage() {
     </div>
   );
 }
+`;
+
+fs.writeFileSync('src/app/eligibility-results/page.tsx', data);
