@@ -44,7 +44,7 @@ const stats = [
 
 export default function GovImpact() {
   return (
-    <section className="py-24 bg-[#05080f] relative overflow-hidden">
+    <section id="gov-impact" className="py-24 bg-[#05080f] relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
       
