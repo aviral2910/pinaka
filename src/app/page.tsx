@@ -4,6 +4,7 @@ import Services from '@/components/Services';
 import Schemes from '@/components/Schemes';
 import Process from '@/components/Process';
 import About from '@/components/About';
+import GovImpact from '@/components/GovImpact';
 import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
@@ -19,6 +20,7 @@ export default function Home() {
       <Schemes />
       <Process />
       <About />
+      <GovImpact />
       <Testimonials />
       <Contact />
       <Footer />
