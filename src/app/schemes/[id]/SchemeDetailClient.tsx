@@ -142,28 +142,31 @@ export default function SchemeDetailClient({ scheme }: { scheme: SchemeData }) {
             </div>
           </motion.div>
 
-        </div>
-
-        {/* Sidebar Column */}
-        <div className="space-y-8">
-          
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
             className="bg-[#111827] border border-white/10 rounded-3xl p-8"
           >
-            <h2 className="text-xl font-bold text-white mb-6">Required Documents</h2>
-            <ul className="space-y-4">
+            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              <FileCheck className="text-purple-400" />
+              Required Documents
+            </h2>
+            <ul className="grid sm:grid-cols-2 gap-4">
               {scheme.documents.map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-sm text-gray-300 bg-white/5 p-3 rounded-xl border border-white/5">
-                  <FileCheck className="w-4 h-4 text-gray-400" />
+                <li key={i} className="flex items-center gap-3 text-sm text-gray-300 bg-white/5 p-4 rounded-xl border border-white/5">
+                  <FileCheck className="w-5 h-5 text-gray-400 flex-shrink-0" />
                   {item}
                 </li>
               ))}
             </ul>
           </motion.div>
 
+        </div>
+
+        {/* Sidebar Column */}
+        <div className="space-y-8">
+          
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
